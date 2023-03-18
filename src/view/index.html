@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1 style="text-align: center;">Node js</h1>
+    <h1 id="data"></h1>
+
+    <!-- <script src="index.js" type="module"></script> -->
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script>
+        axios({
+            method: "GET",
+            url: 'http://localhost:8080/getFood'
+        }).then(result => {
+            result.data.map (item => { 
+                document.querySelector("#data").innerHTML += item.food_name + "<br/>";
+            })
+        }).catch(err => console.log(err));
+    </script>
+
+</body>
+</html>
