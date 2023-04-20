@@ -9,6 +9,7 @@ const {generateToken, verifyToken, parseJwt} = require("../config/jwt");
 
 const bcrypt = require('bcrypt'); 
 const fs = require('fs');
+const { triggerAsyncId } = require("async_hooks");
 
 
 
@@ -19,23 +20,23 @@ const Op = Sequelize.Op;
 //----------------------------------------- MAIN -------------------------------------
 const login = async (req, res) => {
     try{
-        let {email, mat_khau} = req.body;
+        let {email, pass_word} = req.body;
 
         let modelUser = { 
             email, 
-            mat_khau
+            pass_word
         };
 
-        let checkEmail = await model.nguoi_dung.findOne({
+        let checkEmail = await model.NguoiDung.findOne({
             where: { 
                 email
             }
         })
 
         if (checkEmail){
-            let checkPass = bcrypt.compareSync(mat_khau, checkEmail.mat_khau);
+            let checkPass = bcrypt.compareSync(pass_word, checkEmail.pass_word);
             if (checkPass){
-                let token = generateToken({data: {...checkEmail.dataValues, mat_khau: ""}});
+                let token = generateToken({data: {...checkEmail.dataValues, pass_word: ""}});
                 successCode(res, token, "Login thành công");
             }else{
                 failCode(res, "", "Mật khẩu không đúng");
@@ -55,32 +56,32 @@ const login = async (req, res) => {
 
 const signUp = async (req, res) => { 
     try{
-        let {email, mat_khau, ho_ten, tuoi} = req.body;
-        let anh_dai_dien = req.file;
+
+        
+        let {name, email, pass_word, phone, birth_day, gender, role} = req.body;
 
         let modelUser = {
+            name,
             email, 
-            mat_khau: bcrypt.hashSync(mat_khau, 10),
-            ho_ten, 
-            tuoi,
-            anh_dai_dien: anh_dai_dien.filename.toString()
+            pass_word: bcrypt.hashSync(pass_word, 10),
+            phone, 
+            birth_day,
+            gender, 
+            role
         };
 
 
-        let checkEmail = await model.nguoi_dung.findOne({
+        let checkEmail = await model.NguoiDung.findOne({
             where: { 
                 email
             }
         })
 
-        
         if (checkEmail){
             failCode(res, modelUser, "Email đã tồn tại !");
-            fs.unlinkSync(process.cwd() + "/public/img/" + anh_dai_dien.filename.toString());
         } else { 
-            
-            await model.nguoi_dung.create(modelUser);
-            successCode(res, modelUser, "tạo mới thành công");
+            await model.NguoiDung.create(modelUser);
+            successCode(res, modelUser, "Tạo mới thành công");
         }
 
         
@@ -91,21 +92,149 @@ const signUp = async (req, res) => {
     }
 }
 
-// ----------------------------------------- Image Setting (Quản lý ảnh) -----------------------------
-const getCurrentUser = async (req,res) => {
+
+const getUser = async (req,res) => {
     try {
+        let data = await model.NguoiDung.findAll();
+        
+        if (data[0]){
+            successCode(res, data, "Lấy dữ liệu thành công");   
+        }else { 
+            failCode(res, data, "Không tìm thấy dữ liệu");
+        }
+    }
+    catch (err){
+        console.log(err);
+        errorCode(res, "Lỗi BE")
+    }
+}
+
+const createUser = async(req, res) => {
+    try{
+        let {name, email, pass_word, phone, birth_day, gender, role} = req.body;
+
+        let modelUser = {
+            name,
+            email, 
+            pass_word: bcrypt.hashSync(pass_word, 10),
+            phone, 
+            birth_day,
+            gender, 
+            role
+        };
+
+
+        let checkEmail = await model.NguoiDung.findOne({
+            where: { 
+                email
+            }
+        })
+
+        if (checkEmail){
+            failCode(res, modelUser, "Email đã tồn tại !");
+        } else { 
+            await model.NguoiDung.create(modelUser);
+            successCode(res, modelUser, "Tạo mới thành công");
+        }
+
+        
+    }
+    catch (err){
+        console.log(err);
+        errorCode(res, "Lỗi BE")
+    }
+};
+
+const deleteUser = async(req, res) =>  {
+    try{
         let {token} = req.headers; 
         if (verifyToken(token)){
-            // token hợp lệ
-            let nguoi_dung_id = parseJwt(token).data.nguoi_dung_id;
-            let data = await model.nguoi_dung.findAll({
-                where:{nguoi_dung_id}
-            });
+            let {id} = req.query;
+            let role = parseJwt(token).data.role;
+            let checkNguoiDung = await model.NguoiDung.findOne({where:{id}});
             
-            successCode(res, data, "Lấy dữ liệu thành công");
+            if (role === "ADMIN"){
+                if (checkNguoiDung){
+                    await model.NguoiDung.destroy({
+                        where:{
+                            id
+                        }
+                    })
+
+                    try{
+                        fs.unlinkSync(process.cwd() + "/public/img/" + checkNguoiDung.avatar.toString());
+                    } catch {}
+                    
+                    successCode(res, "", "Xóa người dùng thành công");
+                } else{
+                    failCode(res, "", "Người dùng không tồn tại");
+                }
+
+            }else if (id === parseJwt(token).data.id){
+                await model.NguoiDung.destroy({
+                    where:{id}
+                })
+
+                try{
+                    fs.unlinkSync(process.cwd() + "/public/img/" + checkNguoiDung.avatar.toString());
+                } catch {}
+                
+                successCode(res, "", "Xóa người dùng thành công");
+            } else{ 
+                failCode(res, "", "Bạn không phải admin nên không thể xóa người dùng này");
+            }
         }
+    }catch(err){
+        console.log(err);
+        errorCode(res, "Lỗi BE")
+    }
+}
+
+const getUserPhanTrang = async(req, res) => {
+    try{ 
+        let{pageIndex, pageSize, keyword} = req.query;
+
+        if (!keyword){
+            keyword = "";
+        }
+
+        let dataAll = await model.NguoiDung.findAll();
+
+        let data = await model.NguoiDung.findAll({
+            where:{
+                name: {[Op.like]: `%${keyword}%`}
+            },
+            offset: Number((pageIndex-1) * pageSize),
+            limit: Number(pageSize),
+            subQuery:false
+        });
+
+        let modeUser =  {
+            pageIndex: Number(pageIndex),
+            pageSize: Number(pageSize),
+            totalRow: dataAll.length,
+            keywords: keyword?keyword:null,
+            data
+        }
+
+        successCode(res, modeUser, "Lấy dữ liệu thành công");
+
+    }catch(err){
+        console.log(err);
+        errorCode(res, "Lỗi BE")
+    }
+}
+
+const getUserbyID = async(req,res) => { 
+    try {
+        let {id} = req.params;
+        let data = await model.NguoiDung.findAll({where:{id}});
         
-    
+        if(data[0]){                
+            successCode(res, data, "Lấy dữ liệu thành công");
+        }else {
+            failCode(res, data, "Không tìm thấy dữ liệu");
+        }
     }
     catch (err){
         console.log(err);
@@ -113,56 +242,75 @@ const getCurrentUser = async (req,res) => {
     }
 }
 
-
-//---------------------------------------Profile Setting ------------------------------
 const updateUser = async (req,res) => {
     try { 
         let {token} = req.headers; 
         if (verifyToken(token)){
-            let nguoi_dung_id = parseJwt(token).data.nguoi_dung_id;
+            let {id} = req.params;
+            let roleCheck = parseJwt(token).data.role;
+            let idCheck = parseJwt(token).data.id;
 
-            let {email, mat_khau, ho_ten, tuoi} = req.body;
-
-            let anh_dai_dien = req.file;
+            let {name, email, pass_word, phone, birth_day, gender, role} = req.body;
 
             let modelUser = {
+                name,
                 email, 
-                mat_khau: bcrypt.hashSync(mat_khau, 10), 
-                ho_ten,
-                tuoi,
-                anh_dai_dien: anh_dai_dien.filename.toString()
+                pass_word: bcrypt.hashSync(pass_word, 10),
+                phone, 
+                birth_day,
+                gender, 
+                role
             };
 
-            let checkEmail = await model.nguoi_dung.findOne({
+            let checkEmail = await model.NguoiDung.findOne({
                 where: { 
                     email
                 }
             })
 
-            let checkID = await model.nguoi_dung.findOne({
+            let checkID = await model.NguoiDung.findOne({
                 where: { 
-                    nguoi_dung_id
+                    id:idCheck
                 }
             })
 
-            if (checkID.email === email || !checkEmail) { 
-                try{
-                    fs.unlinkSync(process.cwd() + "/public/img/" + checkID.anh_dai_dien);
-                } catch {}
-                
-                await model.nguoi_dung.update(modelUser, {
-                    where:{
-                        nguoi_dung_id, 
-                    }
-                })
-                successCode(res, modelUser, "Update thành công");
-            } else if (checkEmail){
-                failCode(res, modelUser, "Email đã tồn tại !");
-                fs.unlinkSync(process.cwd() + "/public/img/" + anh_dai_dien.filename.toString());
-            } 
+            let checkNguoiDung = await model.NguoiDung.findOne({
+                where: { 
+                    id
+                }
+            })
 
+            
+            
+            if (roleCheck === "ADMIN") { 
+                if (!checkNguoiDung){
+                    failCode(res, modelUser, "ID không tồn tại !");
+                } else if (checkNguoiDung.email === email || !checkEmail) {     
+                    await model.NguoiDung.update(modelUser, {
+                        where:{
+                            id, 
+                        }
+                    })
+                    successCode(res, modelUser, `Update thông tin của ID:${id} thành công`);
+                }else if (checkEmail){
+                    failCode(res, modelUser, "Email đã tồn tại !");
+                }
+
+            } else if (id == idCheck) { 
+                if (checkID.email === email || !checkEmail) {    
+                    await model.NguoiDung.update(modelUser, {
+                        where:{
+                            id, 
+                        }
+                    })
+                    successCode(res, modelUser, "Update thông tin của bạn thành công");
+                }else if (checkEmail){
+                    failCode(res, modelUser, "Email đã tồn tại !");
+                }
+            } else { 
+                failCode(res, "", "Bạn không phải admin nên không thể sửa người dùng này");
+            }
         }
-       
     }
     catch(err){
         console.log(err);
@@ -171,9 +319,66 @@ const updateUser = async (req,res) => {
     
 }
 
+const getUserbyName = async (req, res) => {
+    try {
+        let {name} = req.params;
+        let data = await model.NguoiDung.findAll({
+            where:{
+                name:{[Op.like]: `%${name}%`}
+            }
+        });
+        
+        if(data[0]){                
+            successCode(res, data, "Lấy dữ liệu thành công");
+        }else {
+            failCode(res, data, "Không tìm thấy dữ liệu");
+        }
+    }
+    catch (err){
+        console.log(err);
+        errorCode(res, "Lỗi BE")
+    }
+
+}
+
+const uploadAvatar = async(req, res) => {
+    try{
+        let {token} = req.headers; 
+        if (verifyToken(token)){
+            let {id} = parseJwt(token).data;
+            let duong_dan = req.file;
+
+            console.log(duong_dan);
+
+            let modelImage = {
+                avatar: duong_dan.filename.toString(),
+            };
+
+            let checkId = await model.NguoiDung.findOne({where:{id}});
+
+            try{
+                fs.unlinkSync(process.cwd() + "/public/img/" + checkId.avatar.toString());
+            } catch {}
+            
+            await model.NguoiDung.update(modelImage, {where:{id}});
+            successCode(res, modelImage, "Upload ảnh thành công");
+        } 
+    }catch(err){
+        console.log(err);
+        errorCode(res, "Lỗi BE");
+    }
+}
+
+
 module.exports = { 
-    getCurrentUser,
+    getUser,
+    createUser,
     updateUser,
+    deleteUser,
+    getUserPhanTrang,
+    getUserbyID,
+    getUserbyName,
     signUp,
-    login
+    login,
+    uploadAvatar
 }   

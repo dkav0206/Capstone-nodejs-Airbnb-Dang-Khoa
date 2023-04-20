@@ -1,40 +1,36 @@
 const Sequelize = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  return hinh_anh.init(sequelize, DataTypes);
+  return ViTri.init(sequelize, DataTypes);
 }
 
-class hinh_anh extends Sequelize.Model {
+class ViTri extends Sequelize.Model {
   static init(sequelize, DataTypes) {
   return super.init({
-    hinh_id: {
+    id: {
       autoIncrement: true,
       type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true
     },
-    ten_hinh: {
+    ten_vi_tri: {
       type: DataTypes.STRING(255),
       allowNull: true
     },
-    duong_dan: {
+    tinh_thanh: {
       type: DataTypes.STRING(255),
       allowNull: true
     },
-    mo_ta: {
+    quoc_gia: {
       type: DataTypes.STRING(255),
       allowNull: true
     },
-    nguoi_dung_id: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      references: {
-        model: 'nguoi_dung',
-        key: 'nguoi_dung_id'
-      }
+    hinh_anh: {
+      type: DataTypes.STRING(255),
+      allowNull: true
     }
   }, {
     sequelize,
-    tableName: 'hinh_anh',
+    tableName: 'ViTri',
     timestamps: false,
     indexes: [
       {
@@ -42,14 +38,7 @@ class hinh_anh extends Sequelize.Model {
         unique: true,
         using: "BTREE",
         fields: [
-          { name: "hinh_id" },
-        ]
-      },
-      {
-        name: "nguoi_dung_id",
-        using: "BTREE",
-        fields: [
-          { name: "nguoi_dung_id" },
+          { name: "id" },
         ]
       },
     ]

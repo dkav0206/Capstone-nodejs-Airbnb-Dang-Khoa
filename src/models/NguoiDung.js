@@ -1,40 +1,52 @@
 const Sequelize = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  return nguoi_dung.init(sequelize, DataTypes);
+  return NguoiDung.init(sequelize, DataTypes);
 }
 
-class nguoi_dung extends Sequelize.Model {
+class NguoiDung extends Sequelize.Model {
   static init(sequelize, DataTypes) {
   return super.init({
-    nguoi_dung_id: {
+    id: {
       autoIncrement: true,
       type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true
     },
+    name: {
+      type: DataTypes.STRING(255),
+      allowNull: true
+    },
     email: {
       type: DataTypes.STRING(255),
       allowNull: true
     },
-    mat_khau: {
+    pass_word: {
       type: DataTypes.STRING(255),
       allowNull: true
     },
-    ho_ten: {
+    phone: {
       type: DataTypes.STRING(255),
       allowNull: true
     },
-    tuoi: {
-      type: DataTypes.INTEGER,
+    birth_day: {
+      type: DataTypes.STRING(255),
       allowNull: true
     },
-    anh_dai_dien: {
+    gender: {
+      type: DataTypes.STRING(255),
+      allowNull: true
+    },
+    role: {
+      type: DataTypes.STRING(255),
+      allowNull: true
+    },
+    avatar: {
       type: DataTypes.STRING(255),
       allowNull: true
     }
   }, {
     sequelize,
-    tableName: 'nguoi_dung',
+    tableName: 'NguoiDung',
     timestamps: false,
     indexes: [
       {
@@ -42,7 +54,7 @@ class nguoi_dung extends Sequelize.Model {
         unique: true,
         using: "BTREE",
         fields: [
-          { name: "nguoi_dung_id" },
+          { name: "id" },
         ]
       },
     ]

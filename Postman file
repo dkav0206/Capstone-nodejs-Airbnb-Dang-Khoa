@@ -1,0 +1,986 @@
+{
+	"info": {
+		"_postman_id": "e1091024-acd1-4f5e-9436-5af3cfe4e431",
+		"name": "Final Capstone",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "25715973"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "signup",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"khoa\",\r\n    \"email\": \"abc@gmail.com\",\r\n    \"pass_word\": \"1234\",\r\n    \"phone\":\"123\",\r\n    \"birth_day\":\"12/12\",\r\n    \"gender\":\"male\",\r\n    \"role\":\"?\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{Auth}}/signup",
+							"host": [
+								"{{Auth}}"
+							],
+							"path": [
+								"signup"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "signin",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\":\"\",\r\n    \"pass_word\":\"\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{Auth}}/signin",
+							"host": [
+								"{{Auth}}"
+							],
+							"path": [
+								"signin"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "BinhLuan",
+			"item": [
+				{
+					"name": "Lấy hết bình luận",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BinhLuan}}",
+							"host": [
+								"{{BinhLuan}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Bình luận",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImlkIjoxLCJuYW1lIjoia2hvYSIsImVtYWlsIjoiYWJjQGdtYWlsLmNvbSIsInBhc3Nfd29yZCI6IiIsInBob25lIjoiMTIzIiwiYmlydGhfZGF5IjoiMTIvMTIiLCJnZW5kZXIiOiJtYWxlIiwicm9sZSI6Ij8ifSwiaWF0IjoxNjgxNzA1MzQ5LCJleHAiOjE2ODE3MDg5NDl9.WEy3YCfD3akpyKhbFNg2Aicb3GEN7S2gW7jeSntOGRg",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"ma_phong\": \"\",\r\n    \"noi_dung\":\"dsa\",\r\n    \"sao_binh_luan\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Bình Luận",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImlkIjoxLCJuYW1lIjoia2hvYSIsImVtYWlsIjoiYWJjQGdtYWlsLmNvbSIsInBhc3Nfd29yZCI6IiIsInBob25lIjoiMTIzIiwiYmlydGhfZGF5IjoiMTIvMTIiLCJnZW5kZXIiOiJtYWxlIiwicm9sZSI6Ij8ifSwiaWF0IjoxNjgxNzEwMzcxLCJleHAiOjE2ODE3MTM5NzF9.TJwRAZV-evEyN9EnJJ90pWEA804jtSe91S4MMfpmuOk",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"ma_phong\": \"\",\r\n    \"noi_dung\":\"dsa\",\r\n    \"sao_binh_luan\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BinhLuan}}/1",
+							"host": [
+								"{{BinhLuan}}"
+							],
+							"path": [
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Xóa Bình Luận",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{BinhLuan}}/1",
+							"host": [
+								"{{BinhLuan}}"
+							],
+							"path": [
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Lấy bình luận theo id phòng",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImlkIjoxLCJuYW1lIjoia2hvYSIsImVtYWlsIjoiYWJjQGdtYWlsLmNvbSIsInBhc3Nfd29yZCI6IiIsInBob25lIjoiMTIzIiwiYmlydGhfZGF5IjoiMTIvMTIiLCJnZW5kZXIiOiJtYWxlIiwicm9sZSI6Ij8ifSwiaWF0IjoxNjgxNzEwMzcxLCJleHAiOjE2ODE3MTM5NzF9.TJwRAZV-evEyN9EnJJ90pWEA804jtSe91S4MMfpmuOk",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{BinhLuan}}/lay-binh-luan-theo-phong/1",
+							"host": [
+								"{{BinhLuan}}"
+							],
+							"path": [
+								"lay-binh-luan-theo-phong",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "DatPhong",
+			"item": [
+				{
+					"name": "Lấy hết đặt phòng",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{DatPhong}}",
+							"host": [
+								"{{DatPhong}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Đặt Phòng",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImlkIjoxLCJuYW1lIjoia2hvYSIsImVtYWlsIjoiYWJjQGdtYWlsLmNvbSIsInBhc3Nfd29yZCI6IiIsInBob25lIjoiMTIzIiwiYmlydGhfZGF5IjoiMTIvMTIiLCJnZW5kZXIiOiJtYWxlIiwicm9sZSI6Ij8ifSwiaWF0IjoxNjgxNzE3MzMwLCJleHAiOjE2ODE3MjA5MzB9.GDd4KXwGI8xkrVViVPtv9JrPQmSgTe2mq1QRePkfNkM",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"ma_phong\":2,\r\n    \"ngay_den\":\"13/12/2023\",\r\n    \"ngay_di\":\"23/12/2023\",\r\n    \"so_luong_khach\":2\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{DatPhong}}",
+							"host": [
+								"{{DatPhong}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Lấy đặt phòng theo ID",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "Sửa đặt phòng",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImlkIjoxLCJuYW1lIjoia2hvYSIsImVtYWlsIjoiYWJjQGdtYWlsLmNvbSIsInBhc3Nfd29yZCI6IiIsInBob25lIjoiMTIzIiwiYmlydGhfZGF5IjoiMTIvMTIiLCJnZW5kZXIiOiJtYWxlIiwicm9sZSI6Ij8ifSwiaWF0IjoxNjgxNzE3MzMwLCJleHAiOjE2ODE3MjA5MzB9.GDd4KXwGI8xkrVViVPtv9JrPQmSgTe2mq1QRePkfNkM",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"ma_phong\":2,\r\n    \"ngay_den\":\"04 June 2023\",\r\n    \"ngay_di\":\"05 June 2231\",\r\n    \"so_luong_khach\":2\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{DatPhong}}/2",
+							"host": [
+								"{{DatPhong}}"
+							],
+							"path": [
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Xóa đặt phòng",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImlkIjoxLCJuYW1lIjoia2hvYSIsImVtYWlsIjoiYWJjQGdtYWlsLmNvbSIsInBhc3Nfd29yZCI6IiIsInBob25lIjoiMTIzIiwiYmlydGhfZGF5IjoiMTIvMTIiLCJnZW5kZXIiOiJtYWxlIiwicm9sZSI6Ij8ifSwiaWF0IjoxNjgxNzIwNjUzLCJleHAiOjE2ODE3MjQyNTN9.FjcbaO8I5JKDZ6EGbcMohe2XldxHFibsh6BMf09fE44",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{DatPhong}}/2",
+							"host": [
+								"{{DatPhong}}"
+							],
+							"path": [
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Lấy đặt phòng theo ID user",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "NguoiDung",
+			"item": [
+				{
+					"name": "Lấy tất cả người dùng",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{User}}",
+							"host": [
+								"{{User}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Tạo người dùng",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImlkIjoxLCJuYW1lIjoia2hvYSIsImVtYWlsIjoiYWJjQGdtYWlsLmNvbSIsInBhc3Nfd29yZCI6IiIsInBob25lIjoiMTIzIiwiYmlydGhfZGF5IjoiMTIvMTIiLCJnZW5kZXIiOiJtYWxlIiwicm9sZSI6Ij8ifSwiaWF0IjoxNjgxNzI1Mzg4LCJleHAiOjE2ODE3NjEzODh9.jkgyvPVOkYgynJbnRW7QHENzhIDDWzpjIw9Rv4rpgws",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"khoa\",\r\n    \"email\": \"abc@gmail.com\",\r\n    \"pass_word\": \"1234\",\r\n    \"phone\":\"123\",\r\n    \"birth_day\":\"12/12\",\r\n    \"gender\":\"male\",\r\n    \"role\":\"?\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{User}}",
+							"host": [
+								"{{User}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Xóa người dùng",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImlkIjoxLCJuYW1lIjoia2hvYSIsImVtYWlsIjoiYWJjQGdtYWlsLmNvbSIsInBhc3Nfd29yZCI6IiIsInBob25lIjoiMTIzIiwiYmlydGhfZGF5IjoiMTIvMTIiLCJnZW5kZXIiOiJtYWxlIiwicm9sZSI6Ij8ifSwiaWF0IjoxNjgxNzI1Mzg4LCJleHAiOjE2ODE3NjEzODh9.jkgyvPVOkYgynJbnRW7QHENzhIDDWzpjIw9Rv4rpgws",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{User}}?id=2",
+							"host": [
+								"{{User}}"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Lấy người dùng phân trang",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{User}}/phan-trang-tim-kiem",
+							"host": [
+								"{{User}}"
+							],
+							"path": [
+								"phan-trang-tim-kiem"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Lấy người dùng theo id",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{User}}/1",
+							"host": [
+								"{{User}}"
+							],
+							"path": [
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Sửa thông tin người dùng",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImlkIjoxLCJuYW1lIjoia2hvYSIsImVtYWlsIjoiYWJjQGdtYWlsLmNvbSIsInBhc3Nfd29yZCI6IiIsInBob25lIjoiMTIzIiwiYmlydGhfZGF5IjoiMTIvMTIiLCJnZW5kZXIiOiJtYWxlIiwicm9sZSI6IkFETUlOIn0sImlhdCI6MTY4MTczNzI4OCwiZXhwIjoxNjgxNzczMjg4fQ.fx3uyr9oWxTBREWT4Qi9jQSJGODwHabSMXiLlqVnQwY",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"khoa\",\r\n    \"email\": \"abc@gmail.com\",\r\n    \"pass_word\": \"1234\",\r\n    \"phone\":\"123\",\r\n    \"birth_day\":\"12/12\",\r\n    \"gender\":\"male\",\r\n    \"role\":\"?\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{User}}/2",
+							"host": [
+								"{{User}}"
+							],
+							"path": [
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Lấy người dùng theo tên",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImlkIjoxLCJuYW1lIjoia2hvYSIsImVtYWlsIjoiYWJjQGdtYWlsLmNvbSIsInBhc3Nfd29yZCI6IiIsInBob25lIjoiMTIzIiwiYmlydGhfZGF5IjoiMTIvMTIiLCJnZW5kZXIiOiJtYWxlIiwicm9sZSI6IkFETUlOIn0sImlhdCI6MTY4MTc5MjM5OSwiZXhwIjoxNjgxODI4Mzk5fQ.AYWtcDxSryGDlPiEL3kCIG6f0i6U-YHDhmJG9qfb7IM",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{User}}/search/w",
+							"host": [
+								"{{User}}"
+							],
+							"path": [
+								"search",
+								"w"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Upload ảnh avatar",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImlkIjoxLCJuYW1lIjoia2hvYSIsImVtYWlsIjoiYWJjQGdtYWlsLmNvbSIsInBhc3Nfd29yZCI6IiIsInBob25lIjoiMTIzIiwiYmlydGhfZGF5IjoiMTIvMTIiLCJnZW5kZXIiOiJtYWxlIiwicm9sZSI6IkFETUlOIn0sImlhdCI6MTY4MTg2OTg4NywiZXhwIjoxNjgxOTA1ODg3fQ.XU4_7UPGF0PLdD5eNqEDD9mUoYjKS7BlmjptmGLNHR4",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "formFile",
+									"type": "file",
+									"src": "/C:/Users/Khoa/Pictures/a3.jpg"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{Phong}}/upload-avatar",
+							"host": [
+								"{{Phong}}"
+							],
+							"path": [
+								"upload-avatar"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Phong",
+			"item": [
+				{
+					"name": "Lấy tất cả phòng",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{Phong}}",
+							"host": [
+								"{{Phong}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Tạo phòng",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImlkIjoxLCJuYW1lIjoia2hvYSIsImVtYWlsIjoiYWJjQGdtYWlsLmNvbSIsInBhc3Nfd29yZCI6IiIsInBob25lIjoiMTIzIiwiYmlydGhfZGF5IjoiMTIvMTIiLCJnZW5kZXIiOiJtYWxlIiwicm9sZSI6IkFETUlOIn0sImlhdCI6MTY4MTc5MjM5OSwiZXhwIjoxNjgxODI4Mzk5fQ.AYWtcDxSryGDlPiEL3kCIG6f0i6U-YHDhmJG9qfb7IM",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"ten_phong\":\"das\", \r\n    \"khach\":10, \r\n    \"phong_ngu\":10, \r\n    \"giuong\":10, \r\n    \"phong_tam\":10, \r\n    \"mo_ta\":\"\", \r\n    \"gia_tien\":2, \r\n    \"may_giat\":true, \r\n    \"ban_la\":true, \r\n    \"tivi\":true, \r\n    \"dieu_hoa\":true, \r\n    \"wifi\": true,\r\n    \"bep\":true,\r\n    \"do_xe\": true,\r\n    \"ho_boi\": true,\r\n    \"ban_ui\": true,\r\n    \"ma_vi_tri\": 1,\r\n    \"hinh_anh\":\"saddas\"       \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{Phong}}",
+							"host": [
+								"{{Phong}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Lấy phòng theo vị trí",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{Phong}}/lay-phong-theo-vi-tri?ma_vi_tri=1",
+							"host": [
+								"{{Phong}}"
+							],
+							"path": [
+								"lay-phong-theo-vi-tri"
+							],
+							"query": [
+								{
+									"key": "ma_vi_tri",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Lấy phòng theo phân trang",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{Phong}}/phan-trang-tim-kiem?pageIndex=1&pageSize=1",
+							"host": [
+								"{{Phong}}"
+							],
+							"path": [
+								"phan-trang-tim-kiem"
+							],
+							"query": [
+								{
+									"key": "pageIndex",
+									"value": "1"
+								},
+								{
+									"key": "pageSize",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Lấy phòng theo ID",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImlkIjoxLCJuYW1lIjoia2hvYSIsImVtYWlsIjoiYWJjQGdtYWlsLmNvbSIsInBhc3Nfd29yZCI6IiIsInBob25lIjoiMTIzIiwiYmlydGhfZGF5IjoiMTIvMTIiLCJnZW5kZXIiOiJtYWxlIiwicm9sZSI6IkFETUlOIn0sImlhdCI6MTY4MTc5MjM5OSwiZXhwIjoxNjgxODI4Mzk5fQ.AYWtcDxSryGDlPiEL3kCIG6f0i6U-YHDhmJG9qfb7IM",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{Phong}}/10",
+							"host": [
+								"{{Phong}}"
+							],
+							"path": [
+								"10"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Sửa thông tin phòng",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImlkIjoxLCJuYW1lIjoia2hvYSIsImVtYWlsIjoiYWJjQGdtYWlsLmNvbSIsInBhc3Nfd29yZCI6IiIsInBob25lIjoiMTIzIiwiYmlydGhfZGF5IjoiMTIvMTIiLCJnZW5kZXIiOiJtYWxlIiwicm9sZSI6IkFETUlOIn0sImlhdCI6MTY4MTc5MjM5OSwiZXhwIjoxNjgxODI4Mzk5fQ.AYWtcDxSryGDlPiEL3kCIG6f0i6U-YHDhmJG9qfb7IM",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"ten_phong\":\"das\", \r\n    \"khach\":10, \r\n    \"phong_ngu\":10, \r\n    \"giuong\":10, \r\n    \"phong_tam\":10, \r\n    \"mo_ta\":\"\", \r\n    \"gia_tien\":2, \r\n    \"may_giat\":true, \r\n    \"ban_la\":true, \r\n    \"tivi\":true, \r\n    \"dieu_hoa\":true, \r\n    \"wifi\": true,\r\n    \"bep\":true,\r\n    \"do_xe\": true,\r\n    \"ho_boi\": true,\r\n    \"ban_ui\": true,\r\n    \"ma_vi_tri\": 1,\r\n    \"hinh_anh\":\"saddas\"       \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{Phong}}/2",
+							"host": [
+								"{{Phong}}"
+							],
+							"path": [
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Xóa phòng",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImlkIjoxLCJuYW1lIjoia2hvYSIsImVtYWlsIjoiYWJjQGdtYWlsLmNvbSIsInBhc3Nfd29yZCI6IiIsInBob25lIjoiMTIzIiwiYmlydGhfZGF5IjoiMTIvMTIiLCJnZW5kZXIiOiJtYWxlIiwicm9sZSI6IkFETUlOIn0sImlhdCI6MTY4MTc5MjM5OSwiZXhwIjoxNjgxODI4Mzk5fQ.AYWtcDxSryGDlPiEL3kCIG6f0i6U-YHDhmJG9qfb7IM",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{Phong}}/1",
+							"host": [
+								"{{Phong}}"
+							],
+							"path": [
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Upload ảnh phòng",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImlkIjoxLCJuYW1lIjoia2hvYSIsImVtYWlsIjoiYWJjQGdtYWlsLmNvbSIsInBhc3Nfd29yZCI6IiIsInBob25lIjoiMTIzIiwiYmlydGhfZGF5IjoiMTIvMTIiLCJnZW5kZXIiOiJtYWxlIiwicm9sZSI6IkFETUlOIn0sImlhdCI6MTY4MTg2OTg4NywiZXhwIjoxNjgxOTA1ODg3fQ.XU4_7UPGF0PLdD5eNqEDD9mUoYjKS7BlmjptmGLNHR4",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "formFile",
+									"type": "file",
+									"src": "/C:/Users/Khoa/Pictures/a3.jpg"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{Phong}}/upload-hinh-phong?id=22",
+							"host": [
+								"{{Phong}}"
+							],
+							"path": [
+								"upload-hinh-phong"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "22"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "ViTri",
+			"item": [
+				{
+					"name": "Lấy vị trí",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{ViTri}}",
+							"host": [
+								"{{ViTri}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Tạo vị trí",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "token",
+								"value": "modelVitri",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"ten_vi_tri\": \" 231\",\r\n    \"tinh_thanh\": \"3213\",\r\n    \"quoc_gia\": \"213 \",\r\n    \"hinh_anh\": \"213\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{ViTri}}",
+							"host": [
+								"{{ViTri}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Lấy vị trí phân trang",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImlkIjoxLCJuYW1lIjoia2hvYSIsImVtYWlsIjoiYWJjQGdtYWlsLmNvbSIsInBhc3Nfd29yZCI6IiIsInBob25lIjoiMTIzIiwiYmlydGhfZGF5IjoiMTIvMTIiLCJnZW5kZXIiOiJtYWxlIiwicm9sZSI6IkFETUlOIn0sImlhdCI6MTY4MTgxODM1OSwiZXhwIjoxNjgxODU0MzU5fQ.GV5jSh8rpmKALaAAUPpScxW0eW7f_tTn1mK46DttnnI",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{ViTri}}/phan-trang-tim-kiem?pageIndex=1&pageSize=2",
+							"host": [
+								"{{ViTri}}"
+							],
+							"path": [
+								"phan-trang-tim-kiem"
+							],
+							"query": [
+								{
+									"key": "pageIndex",
+									"value": "1"
+								},
+								{
+									"key": "pageSize",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Lấy vị trí theo id",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImlkIjoxLCJuYW1lIjoia2hvYSIsImVtYWlsIjoiYWJjQGdtYWlsLmNvbSIsInBhc3Nfd29yZCI6IiIsInBob25lIjoiMTIzIiwiYmlydGhfZGF5IjoiMTIvMTIiLCJnZW5kZXIiOiJtYWxlIiwicm9sZSI6IkFETUlOIn0sImlhdCI6MTY4MTgxODM1OSwiZXhwIjoxNjgxODU0MzU5fQ.GV5jSh8rpmKALaAAUPpScxW0eW7f_tTn1mK46DttnnI",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{ViTri}}/1",
+							"host": [
+								"{{ViTri}}"
+							],
+							"path": [
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Sửa vị trí",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImlkIjoxLCJuYW1lIjoia2hvYSIsImVtYWlsIjoiYWJjQGdtYWlsLmNvbSIsInBhc3Nfd29yZCI6IiIsInBob25lIjoiMTIzIiwiYmlydGhfZGF5IjoiMTIvMTIiLCJnZW5kZXIiOiJtYWxlIiwicm9sZSI6IkFETUlOIn0sImlhdCI6MTY4MTgxODM1OSwiZXhwIjoxNjgxODU0MzU5fQ.GV5jSh8rpmKALaAAUPpScxW0eW7f_tTn1mK46DttnnI",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"ten_vi_tri\": \" 231\",\r\n    \"tinh_thanh\": \"3213\",\r\n    \"quoc_gia\": \"213 \",\r\n    \"hinh_anh\": \"213\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{ViTri}}/1",
+							"host": [
+								"{{ViTri}}"
+							],
+							"path": [
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Xóa vị trí",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImlkIjoxLCJuYW1lIjoia2hvYSIsImVtYWlsIjoiYWJjQGdtYWlsLmNvbSIsInBhc3Nfd29yZCI6IiIsInBob25lIjoiMTIzIiwiYmlydGhfZGF5IjoiMTIvMTIiLCJnZW5kZXIiOiJtYWxlIiwicm9sZSI6IkFETUlOIn0sImlhdCI6MTY4MTgxODM1OSwiZXhwIjoxNjgxODU0MzU5fQ.GV5jSh8rpmKALaAAUPpScxW0eW7f_tTn1mK46DttnnI",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{ViTri}}/1",
+							"host": [
+								"{{ViTri}}"
+							],
+							"path": [
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Upload ảnh vị trí",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImlkIjoxLCJuYW1lIjoia2hvYSIsImVtYWlsIjoiYWJjQGdtYWlsLmNvbSIsInBhc3Nfd29yZCI6IiIsInBob25lIjoiMTIzIiwiYmlydGhfZGF5IjoiMTIvMTIiLCJnZW5kZXIiOiJtYWxlIiwicm9sZSI6IkFETUlOIn0sImlhdCI6MTY4MTg2OTg4NywiZXhwIjoxNjgxOTA1ODg3fQ.XU4_7UPGF0PLdD5eNqEDD9mUoYjKS7BlmjptmGLNHR4",
+								"type": "text"
+							}
+						]
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "Auth",
+			"value": "localhost:8080/api/auth",
+			"type": "string"
+		},
+		{
+			"key": "BinhLuan",
+			"value": "localhost:8080/api/binh-luan",
+			"type": "string"
+		},
+		{
+			"key": "DatPhong",
+			"value": "localhost:8080/api/dat-phong",
+			"type": "string"
+		},
+		{
+			"key": "User",
+			"value": "localhost:8080/api/users",
+			"type": "string"
+		},
+		{
+			"key": "Phong",
+			"value": "localhost:8080/api/phong-thue",
+			"type": "string"
+		},
+		{
+			"key": "ViTri",
+			"value": "localhost:8080/api/vi-tri",
+			"type": "string"
+		}
+	]
+}
